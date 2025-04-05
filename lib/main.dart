@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:travelgo_admin/feature/logic/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelgo_admin/feature/logic/dashboard/dashboard_bloc.dart';
 import 'package:travelgo_admin/feature/view/widgets/auth_screen.dart';
 
 void main() async {
@@ -16,13 +19,16 @@ void main() async {
         projectId: "travlgo-248ea",
       ),
     );
-    print("✅ Firebase initialized!");
+    log("Firebase initialized!");
   } catch (e) {
-    print("❌ Firebase failed to initialize: $e");
+    log("Firebase failed to initialize: $e");
   }
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => AuthBloc())],
+      providers: [
+        BlocProvider(create: (context)=> DashboardBloc()),
+        BlocProvider(create: (context) => AuthBloc())
+        ],
       child: MyApp(),
     ),
   );

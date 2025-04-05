@@ -8,38 +8,48 @@ class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   @override
-Widget build(BuildContext context) {
-  return MaterialApp(
-    home: StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasData) {
-          return FutureBuilder<bool>(
-            future: checkIfAdmin(snapshot.data!.uid),
-            builder: (context, adminSnapshot) {
-              if (adminSnapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (adminSnapshot.data == true) {
-                return HomeScreen();
-              } else {
-                FirebaseAuth.instance.signOut();
-                return LoginScreen();
-              }
-            },
-          );
-        }
-        return LoginScreen();
-      },
-    ),
-  );
-}
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasData) {
+            return FutureBuilder<bool>(
+              future: checkIfAdmin(snapshot.data!.uid),
+              builder: (context, adminSnapshot) {
+                if (adminSnapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (adminSnapshot.data == true) {
+                  return HomeScreen();
+                } else {
+                  WidgetsBinding.instance.addPostFrameCallback((_) async {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("You're not an admin."),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    await Future.delayed(const Duration(seconds: 2));
+                    await FirebaseAuth.instance.signOut();
+                  });
+                  return LoginScreen();
+                }
+              },
+            );
+          }
+          return LoginScreen();
+        },
+      ),
+    );
+  }
 }
 
 Future<bool> checkIfAdmin(String uid) async {
-  final doc = await FirebaseFirestore.instance.collection("Admin").doc(uid).get();
+  final doc =
+      await FirebaseFirestore.instance.collection("Admin").doc(uid).get();
   return doc.exists;
 }

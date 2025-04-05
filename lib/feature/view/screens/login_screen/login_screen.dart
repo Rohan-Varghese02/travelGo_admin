@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelgo_admin/feature/logic/auth/auth_bloc.dart';
+import 'package:travelgo_admin/feature/view/screens/home_screen/home_screen.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/head_text_field.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_btn.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_rightside.dart';
@@ -23,12 +24,12 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         log(state.runtimeType.toString());
         if (state is AuthException) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.code)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.code), backgroundColor: Colors.red),
+          );
         } else if (state is AuthSucess) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => AuthScreen()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         }
       },
