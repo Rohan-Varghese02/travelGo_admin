@@ -13,7 +13,7 @@ class LoginText extends StatelessWidget {
           'Welcome back!',
           style: GoogleFonts.poppins(fontSize: 50, fontWeight: FontWeight.w600),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 10),
         Text(
           'Enter your Credentials to access your admin',
           style: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w500),

@@ -12,7 +12,8 @@ class HeadingTextField extends StatelessWidget {
     required this.headline,
     required this.controller,
     required this.hint,
-    this.validator,  this.readOnly,
+    this.validator,
+    this.readOnly,
   });
 
   @override
