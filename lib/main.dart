@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:travelgo_admin/feature/logic/auth/auth_bloc.dart';
-import 'package:travelgo_admin/feature/view/screens/auth_screen.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/login_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelgo_admin/feature/view/widgets/auth_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

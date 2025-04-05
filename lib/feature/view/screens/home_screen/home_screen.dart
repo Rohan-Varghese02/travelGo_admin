@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelgo_admin/feature/logic/auth/auth_bloc.dart';
-import 'package:travelgo_admin/feature/view/screens/auth_screen.dart';
+import 'package:travelgo_admin/feature/view/screens/login_screen/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is LogoutState) {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => AuthScreen()),
+                MaterialPageRoute(builder: (context) => LoginScreen()),
               );
             }
           },

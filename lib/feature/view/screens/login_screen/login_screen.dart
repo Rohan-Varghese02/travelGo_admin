@@ -8,6 +8,7 @@ import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/head_te
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_btn.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_rightside.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_text.dart';
+import 'package:travelgo_admin/feature/view/widgets/auth_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
           ).showSnackBar(SnackBar(content: Text(state.code)));
         } else if (state is AuthSucess) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => AuthScreen()),
           );
         }
       },
@@ -79,19 +80,21 @@ class LoginScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 20),
-                          LoginBtn(
-                            width: width * 0.5,
-                            height: height * 0.07,
-                            onPressed: () {
-                              if (emailkey.currentState!.validate()) {
-                                context.read<AuthBloc>().add(
-                                  LoginBtnPressed(
-                                    email: emailController.text,
-                                    password: passController.text,
-                                  ),
-                                );
-                              }
-                            },
+                          Center(
+                            child: LoginBtn(
+                              width: width * 0.4,
+                              height: height * 0.07,
+                              onPressed: () {
+                                if (emailkey.currentState!.validate()) {
+                                  context.read<AuthBloc>().add(
+                                    LoginBtnPressed(
+                                      email: emailController.text,
+                                      password: passController.text,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                           ),
                         ],
                       ),

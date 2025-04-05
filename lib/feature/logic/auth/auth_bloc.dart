@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:travelgo_admin/core/service/auth_services.dart';
-import 'package:travelgo_admin/core/service/errorcode.dart';
+import 'package:travelgo_admin/core/service/auth_error_code.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -25,9 +24,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final authservice = AuthServices();
     try {
       await authservice.signinWithEmailAndPassword(event.email, event.password);
+      log(authservice.getUserCredential()!.uid.toString());
       emit(AuthSucess());
-    } catch (e) {
-      String message = getErrorMessage(e.toString());
+    } on AuthException catch (e) {
+      log(e.code);
+      String message = getErrorMessage(e.code.toString());
+      log(message);
       emit(AuthException(code: message));
     }
   }

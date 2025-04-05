@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginBtn extends StatelessWidget {
-  const LoginBtn({super.key, required this.width, required this.height, this.onPressed});
+  const LoginBtn({
+    super.key,
+    required this.width,
+    required this.height,
+    this.onPressed,
+  });
   final double width;
   final double height;
   final void Function()? onPressed;
@@ -11,7 +16,7 @@ class LoginBtn extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: Size(width, height),
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
       ),
       onPressed: onPressed,
