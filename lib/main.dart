@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:travelgo_admin/feature/logic/admin/admin_bloc.dart';
 import 'package:travelgo_admin/feature/logic/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelgo_admin/feature/logic/dashboard/dashboard_bloc.dart';
@@ -26,9 +27,10 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=> DashboardBloc()),
-        BlocProvider(create: (context) => AuthBloc())
-        ],
+        BlocProvider(create: (context) => AdminBloc()),
+        BlocProvider(create: (context) => DashboardBloc()),
+        BlocProvider(create: (context) => AuthBloc()),
+      ],
       child: MyApp(),
     ),
   );

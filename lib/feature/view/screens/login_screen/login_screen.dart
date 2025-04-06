@@ -8,7 +8,6 @@ import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/head_te
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_btn.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_rightside.dart';
 import 'package:travelgo_admin/feature/view/screens/login_screen/widgets/login_text.dart';
-import 'package:travelgo_admin/feature/view/widgets/auth_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
