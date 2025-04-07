@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,8 +41,9 @@ class PendingList extends StatelessWidget {
                   width: 540,
                   height: 340,
                   decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.deepPurple.shade50,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.deepPurple.shade100),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),

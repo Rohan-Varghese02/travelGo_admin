@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelgo_admin/data/models/category_model.dart';
 import 'package:travelgo_admin/data/models/pending_organizer_model.dart';
+import 'package:travelgo_admin/data/models/user_model.dart';
 
 class ApiServices {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -51,7 +52,7 @@ class ApiServices {
 
   // Pending user
 
-  Stream<List<PendingOrganizerModel>> getPendingOrgazinerStream() {
+  Stream<List<OrganizerModel>> getPendingOrgazinerStream() {
     return firestore
         .collection('Organizers')
         .where('role', isEqualTo: 'pending-organizer')
@@ -59,7 +60,7 @@ class ApiServices {
         .map(
           (snapshot) =>
               snapshot.docs
-                  .map((doc) => PendingOrganizerModel.fromFireStore(doc))
+                  .map((doc) => OrganizerModel.fromFireStore(doc))
                   .toList(),
         );
   }
@@ -67,8 +68,8 @@ class ApiServices {
   void testPendingFetch() async {
     final snapshot =
         await FirebaseFirestore.instance
-            .collection('Organizers')
-            .where('role', isEqualTo: 'pending-organizer')
+            .collection('Users')
+            .where('role', isEqualTo: 'user')
             .get();
 
     print("Found ${snapshot.docs.length} pending organizers");
@@ -82,5 +83,32 @@ class ApiServices {
     firestore.collection('Organizers').doc(id).update({
       'role': 'not-organizer',
     });
+  }
+
+  // User list
+
+  Stream<List<UserModel>> getUserList() {
+    return firestore
+        .collection('Users')
+        .where('role', isEqualTo: 'user')
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => UserModel.fromFirestore(doc)).toList(),
+        );
+  }
+
+  // Organizer List
+  Stream<List<OrganizerModel>> getOrganizerList() {
+    return firestore
+        .collection('Organizers')
+        .where('role', isEqualTo: 'organizer')
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs
+                  .map((doc) => OrganizerModel.fromFireStore(doc))
+                  .toList(),
+        );
   }
 }

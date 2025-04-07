@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PendingOrganizerModel {
+class OrganizerModel {
   final String id;
   final String name;
   final String uid;
@@ -15,7 +15,7 @@ class PendingOrganizerModel {
   final String experience;
   final int followersCount;
 
-  PendingOrganizerModel({
+  OrganizerModel({
     required this.id,
     required this.name,
     required this.uid,
@@ -31,10 +31,10 @@ class PendingOrganizerModel {
     required this.followersCount,
   });
 
-  factory PendingOrganizerModel.fromFireStore(DocumentSnapshot doc) {
+  factory OrganizerModel.fromFireStore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 
-    return PendingOrganizerModel(
+    return OrganizerModel(
       id: doc.id,
       name: data['name'] ?? '',
       uid: data['uid'] ?? '',
