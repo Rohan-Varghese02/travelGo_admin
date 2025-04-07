@@ -7,13 +7,14 @@ class HeadingTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool? readOnly;
+  final bool? obsecureText;
   const HeadingTextField({
     super.key,
     required this.headline,
     required this.controller,
     required this.hint,
     this.validator,
-    this.readOnly,
+    this.readOnly, this.obsecureText,
   });
 
   @override
@@ -26,6 +27,7 @@ class HeadingTextField extends StatelessWidget {
           style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         TextFormField(
+          obscureText: obsecureText?? false,
           readOnly: readOnly ?? false,
           validator: validator,
           controller: controller,

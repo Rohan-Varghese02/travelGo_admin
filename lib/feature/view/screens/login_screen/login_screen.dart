@@ -68,6 +68,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 20),
                           HeadingTextField(
+                            obsecureText: true,
                             headline: 'Password',
                             controller: passController,
                             hint: 'Enter your password',
