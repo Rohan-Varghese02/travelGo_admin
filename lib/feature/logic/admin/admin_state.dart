@@ -35,3 +35,8 @@ class CategoryDeletedSuccessful extends AdminState{
 class EventAddMenuOpen extends AdminState{}
 
 class EventAddedSuccessfully extends AdminState{}
+
+// Pending Organizer --- Event
+class OrganizerAccepted extends AdminState{}
+
+class OrganizerRejected extends AdminState{}

@@ -12,7 +12,6 @@ class CountryAdd extends AdminEvent {
   CountryAdd({required this.country});
 }
 
-
 // Category Action  -- Common for Both Category//
 class CategoryEditEvent extends AdminEvent {
   final String name;
@@ -51,4 +50,17 @@ class EventAddEvent extends AdminEvent {
   EventAddEvent({required this.event});
 }
 
+// Pending Organizer
 
+class AcceptOrganizer extends AdminEvent {
+  final String id;
+
+  AcceptOrganizer({required this.id});
+}
+
+class RejectOrganizer extends AdminEvent {
+  final String id;
+
+  RejectOrganizer({required this.id});
+  
+}

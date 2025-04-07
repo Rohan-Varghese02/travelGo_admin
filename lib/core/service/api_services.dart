@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelgo_admin/data/models/category_model.dart';
+import 'package:travelgo_admin/data/models/pending_organizer_model.dart';
 
 class ApiServices {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -46,5 +47,40 @@ class ApiServices {
           (snapshot) =>
               snapshot.docs.map((doc) => Category.fromFirestore(doc)).toList(),
         );
+  }
+
+  // Pending user
+
+  Stream<List<PendingOrganizerModel>> getPendingOrgazinerStream() {
+    return firestore
+        .collection('Organizers')
+        .where('role', isEqualTo: 'pending-organizer')
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs
+                  .map((doc) => PendingOrganizerModel.fromFireStore(doc))
+                  .toList(),
+        );
+  }
+
+  void testPendingFetch() async {
+    final snapshot =
+        await FirebaseFirestore.instance
+            .collection('Organizers')
+            .where('role', isEqualTo: 'pending-organizer')
+            .get();
+
+    print("Found ${snapshot.docs.length} pending organizers");
+  }
+
+  void acceptOrganizer(String id) {
+    firestore.collection('Organizers').doc(id).update({'role': 'organizer'});
+  }
+
+  void rejectOrganizer(String id) {
+    firestore.collection('Organizers').doc(id).update({
+      'role': 'not-organizer',
+    });
   }
 }

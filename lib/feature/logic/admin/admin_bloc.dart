@@ -20,6 +20,10 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     // Category Action  -- Event//
     on<EventAddButton>(eventAddButton);
     on<EventAddEvent>(eventAddEvent);
+
+    // Pending Organizer
+    on<AcceptOrganizer>(acceptOrganizer);
+    on<RejectOrganizer>(rejectOrganizer);
   }
 
   // Category Action  -- Country//
@@ -81,5 +85,23 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     final api = ApiServices();
     api.addEventCategory(event.event);
     emit(EventAddedSuccessfully());
+  }
+
+  FutureOr<void> acceptOrganizer(
+    AcceptOrganizer event,
+    Emitter<AdminState> emit,
+  ) {
+    final api = ApiServices();
+    api.acceptOrganizer(event.id);
+    emit(OrganizerAccepted());
+  }
+
+  FutureOr<void> rejectOrganizer(
+    RejectOrganizer event,
+    Emitter<AdminState> emit,
+  ) {
+    final api = ApiServices();
+    api.rejectOrganizer(event.id);
+    emit(OrganizerRejected());
   }
 }
