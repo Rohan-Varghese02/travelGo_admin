@@ -3,38 +3,52 @@ part of 'admin_bloc.dart';
 @immutable
 sealed class AdminEvent {}
 
+// Category Action  -- Country//
 class CountryAddButton extends AdminEvent {}
 
-// Category Action  -- Country//
 class CountryAdd extends AdminEvent {
   final String country;
 
   CountryAdd({required this.country});
 }
 
-class CountryEditEvent extends AdminEvent {
+
+// Category Action  -- Common for Both Category//
+class CategoryEditEvent extends AdminEvent {
   final String name;
   final String id;
 
-  CountryEditEvent({required this.name, required this.id});
+  CategoryEditEvent({required this.name, required this.id});
 }
 
-class CountryUpdateEvent extends AdminEvent {
+class CategoryUpdateEvent extends AdminEvent {
   final String name;
   final String id;
 
-  CountryUpdateEvent({required this.name, required this.id});
+  CategoryUpdateEvent({required this.name, required this.id});
 }
 
-class CountryDeleteBtn extends AdminEvent {
+class CategoryDeleteBtn extends AdminEvent {
   final String name;
   final String id;
 
-  CountryDeleteBtn({required this.id, required this.name});
+  CategoryDeleteBtn({required this.id, required this.name});
 }
 
-class CountryDeleting extends AdminEvent {
+class CategoryDeleting extends AdminEvent {
   final String id;
 
-  CountryDeleting({required this.id});
+  CategoryDeleting({required this.id});
 }
+
+// Category Action  -- Event//
+
+class EventAddButton extends AdminEvent {}
+
+class EventAddEvent extends AdminEvent {
+  final String event;
+
+  EventAddEvent({required this.event});
+}
+
+

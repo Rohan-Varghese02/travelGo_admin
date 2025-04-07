@@ -8,24 +8,30 @@ final class AdminInitial extends AdminState {}
 // Category Action  -- Country//
 class CountryAddMenuOpen extends AdminState {}
 
-class CountryAdded extends AdminState {}
+class CategoryAdded extends AdminState {}
 
-class EditCountryState extends AdminState {
+// Category Action  -- Common for both category//
+class EditCategoryState extends AdminState {
   final String name;
   final String id;
 
-  EditCountryState({required this.name, required this.id});
+  EditCategoryState({required this.name, required this.id});
 }
 
-class CountryUpdated extends AdminState {}
+class CategoryUpdated extends AdminState {}
 
-class DeleteIntitateCountryState extends AdminState {
+class DeleteIntitateCategoryState extends AdminState {
   final String name;
   final String id;
 
-  DeleteIntitateCountryState({required this.id, required this.name});
+  DeleteIntitateCategoryState({required this.id, required this.name});
 }
 
-class CountryDeletedSuccessful extends AdminState{
+class CategoryDeletedSuccessful extends AdminState{
   
 }
+
+// Category Action  -- Event//
+class EventAddMenuOpen extends AdminState{}
+
+class EventAddedSuccessfully extends AdminState{}

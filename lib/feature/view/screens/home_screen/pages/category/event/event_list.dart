@@ -1,18 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travelgo_admin/core/service/api_services.dart';
 import 'package:travelgo_admin/feature/logic/admin/admin_bloc.dart';
 
-class CountryList extends StatelessWidget {
-  const CountryList({super.key});
+class EventList extends StatelessWidget {
+  const EventList({super.key});
   @override
   Widget build(BuildContext context) {
     ApiServices apiServices = ApiServices();
     return StreamBuilder(
-      stream: apiServices.countryCategoryStream(),
+      stream: apiServices.eventCategoryStream(),
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Padding(
@@ -53,7 +51,6 @@ class CountryList extends StatelessWidget {
                     ],
                 onSelected: (value) {
                   if (value == 'Edit') {
-                    log('1');
                     context.read<AdminBloc>().add(
                       CategoryEditEvent(
                         name: categories[index].name,

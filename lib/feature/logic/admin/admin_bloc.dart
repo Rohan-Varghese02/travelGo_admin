@@ -13,12 +13,17 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     // Category Action  -- Country//
     on<CountryAddButton>(countryAddButton);
     on<CountryAdd>(countryAdd);
-    on<CountryEditEvent>(countryEditEvent);
-    on<CountryUpdateEvent>(countryUpdateEvent);
-    on<CountryDeleteBtn>(countryDeleteBtn);
-    on<CountryDeleting>(countryDeleting);
+    on<CategoryEditEvent>(countryEditEvent);
+    on<CategoryUpdateEvent>(countryUpdateEvent);
+    on<CategoryDeleteBtn>(countryDeleteBtn);
+    on<CategoryDeleting>(countryDeleting);
+
+    // Category Action  -- Event//
+    on<EventAddButton>(eventAddButton);
+    on<EventAddEvent>(eventAddEvent);
   }
 
+  // Category Action  -- Country//
   FutureOr<void> countryAddButton(
     CountryAddButton event,
     Emitter<AdminState> emit,
@@ -29,38 +34,53 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
   FutureOr<void> countryAdd(CountryAdd event, Emitter<AdminState> emit) async {
     final api = ApiServices();
     api.addCountryCategory(event.country);
-    emit(CountryAdded());
+    emit(CategoryAdded());
   }
 
   FutureOr<void> countryEditEvent(
-    CountryEditEvent event,
+    CategoryEditEvent event,
     Emitter<AdminState> emit,
   ) {
-    emit(EditCountryState(name: event.name, id: event.id));
+    emit(EditCategoryState(name: event.name, id: event.id));
   }
 
   FutureOr<void> countryUpdateEvent(
-    CountryUpdateEvent event,
+    CategoryUpdateEvent event,
     Emitter<AdminState> emit,
   ) {
     final api = ApiServices();
     api.editCountryCategory(event.name, event.id);
-    emit(CountryUpdated());
+    emit(CategoryUpdated());
   }
 
   FutureOr<void> countryDeleteBtn(
-    CountryDeleteBtn event,
+    CategoryDeleteBtn event,
     Emitter<AdminState> emit,
   ) {
-    emit(DeleteIntitateCountryState(id: event.id, name: event.name));
+    emit(DeleteIntitateCategoryState(id: event.id, name: event.name));
   }
 
   FutureOr<void> countryDeleting(
-    CountryDeleting event,
+    CategoryDeleting event,
     Emitter<AdminState> emit,
   ) {
     final api = ApiServices();
     api.deleteCountryCategory(event.id);
-    emit(CountryDeletedSuccessful());
+    emit(CategoryDeletedSuccessful());
+  }
+
+  // Category Action  -- Event//
+
+  FutureOr<void> eventAddButton(
+    EventAddButton event,
+    Emitter<AdminState> emit,
+  ) {
+    emit(EventAddMenuOpen());
+  }
+
+  FutureOr<void> eventAddEvent(EventAddEvent event, Emitter<AdminState> emit) {
+    final api = ApiServices();
+    api.addEventCategory(event.event);
+    emit(EventAddedSuccessfully());
   }
 }

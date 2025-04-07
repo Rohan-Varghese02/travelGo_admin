@@ -7,7 +7,7 @@ class Category {
   Category({required this.id, required this.name});
 
   factory Category.fromFirestore(DocumentSnapshot doc) {
-    return Category(
+    return Category( 
       id: doc.id,
       name: doc['name'],
     );

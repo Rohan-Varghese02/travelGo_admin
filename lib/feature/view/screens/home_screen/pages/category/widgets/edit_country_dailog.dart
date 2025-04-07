@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelgo_admin/feature/logic/admin/admin_bloc.dart';
@@ -20,7 +19,7 @@ void editCategoryDailog(BuildContext context, String name, id) {
             ElevatedButton(
               onPressed: () {
                 context.read<AdminBloc>().add(
-                  CountryUpdateEvent(name: controller.text, id: id),
+                  CategoryUpdateEvent(name: controller.text, id: id),
                 );
                 Navigator.pop(context);
               },

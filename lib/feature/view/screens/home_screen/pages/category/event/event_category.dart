@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:travelgo_admin/feature/view/screens/home_screen/pages/category/country/country_list.dart';
+import 'package:travelgo_admin/feature/view/screens/home_screen/pages/category/event/event_list.dart';
 import 'package:travelgo_admin/feature/view/screens/home_screen/pages/category/widgets/sub_header.dart';
 
-class CountryCategory extends StatelessWidget {
-  const CountryCategory({super.key, this.onPressed});
+class EventCategory extends StatelessWidget {
+  const EventCategory({super.key, this.onPressed});
   final void Function()? onPressed;
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -16,8 +15,8 @@ class CountryCategory extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            SubHeader(header: 'Countries', onPressed: onPressed),
-            CountryList(),
+            SubHeader(header: 'Events', onPressed: onPressed),
+            EventList(),
           ],
         ),
       ),
