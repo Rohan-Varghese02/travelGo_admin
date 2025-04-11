@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       body: Row(
         children: [
           // Sidebar
-          Container(
+          SizedBox(
             width: width * 0.25,
             child: BlocBuilder<DashboardBloc, DashboardState>(
               builder: (context, state) {
@@ -119,12 +119,8 @@ class HomeScreen extends StatelessWidget {
 
                 switch (selectedIndex) {
                   case 1:
-                    // page = const Center(child: Text("Users Page"));
-                    // break;
                     return OrganizerPage();
                   case 2:
-                    // page = const Center(child: Text("Settings Page"));
-                    // break;
                     return UserPage();
                   case 3:
                     return PendingOrganizerPage();

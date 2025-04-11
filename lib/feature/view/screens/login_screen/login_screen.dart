@@ -22,9 +22,12 @@ class LoginScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         log(state.runtimeType.toString());
-        if (state is AuthException) {
+        if (state is AuthErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.code), backgroundColor: Colors.red),
+            SnackBar(
+              content: Text('Access Denied: Password or Gmail invalid'),
+              backgroundColor: Colors.red,
+            ),
           );
         } else if (state is AuthSucess) {
           Navigator.of(context).pushReplacement(

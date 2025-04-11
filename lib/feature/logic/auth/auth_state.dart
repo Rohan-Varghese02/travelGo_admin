@@ -10,7 +10,9 @@ class AuthException extends AuthState {
 
   AuthException({required this.code});
 }
+class AuthNotWorkingState extends AuthState{}
 class AuthSucess extends AuthState{
 }
+class AuthErrorState extends AuthState{}
 
 class LogoutState extends AuthState{}
