@@ -8,16 +8,18 @@ class EventCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Container(
-      width: width * 0.325,
-      decoration: BoxDecoration(border: Border.all()),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            SubHeader(header: 'Events', onPressed: onPressed),
-            EventList(),
-          ],
+    return Flexible(
+      child: Container(
+        width: width * 0.325,
+        decoration: BoxDecoration(border: Border.all()),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              SubHeader(header: 'Events', onPressed: onPressed),
+              EventList(),
+            ],
+          ),
         ),
       ),
     );

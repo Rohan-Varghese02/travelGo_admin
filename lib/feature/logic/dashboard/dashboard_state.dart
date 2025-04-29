@@ -10,6 +10,4 @@ class DashboardPageSelected extends DashboardState {
   final int selectedIndex;
 
   DashboardPageSelected(this.selectedIndex);
-
 }
-

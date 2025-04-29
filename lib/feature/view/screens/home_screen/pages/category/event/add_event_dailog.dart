@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelgo_admin/feature/logic/admin/admin_bloc.dart';
 
 void addEventDailog(BuildContext context) {
   TextEditingController controller = TextEditingController();
-  final key_state = GlobalKey<FormState>();
+  final keystate = GlobalKey<FormState>();
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         title: Text('Add Event'),
         content: Form(
-          key: key_state,
+          key: keystate,
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(hintText: "Enter event name"),
@@ -31,7 +30,7 @@ void addEventDailog(BuildContext context) {
           ),
           ElevatedButton(
             onPressed: () async {
-              if (key_state.currentState!.validate()) {
+              if (keystate.currentState!.validate()) {
                 context.read<AdminBloc>().add(
                   EventAddEvent(event: controller.text),
                 );

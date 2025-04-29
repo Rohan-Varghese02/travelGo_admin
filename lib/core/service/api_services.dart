@@ -12,6 +12,7 @@ class ApiServices {
     await firestore.collection('categories').add({
       'name': country,
       'type': 'country',
+      'timeStamp': Timestamp.now(),
     });
     log('successful added Category');
   }
@@ -22,6 +23,19 @@ class ApiServices {
 
   void deleteCountryCategory(String id) async {
     firestore.collection('categories').doc(id).delete();
+  }
+
+  void isFeatureCategory(bool isFeature, String uid) {
+    firestore
+        .collection('post')
+        .doc(uid)
+        .update({'isFeatured': isFeature})
+        .then((_) {
+          print('isFeature updated sucessfully');
+        })
+        .catchError((error) {
+          print('Failed to update isFeature:$error');
+        });
   }
 
   Stream<List<Category>> countryCategoryStream() {
@@ -36,7 +50,11 @@ class ApiServices {
   }
 
   void addEventCategory(String event) async {
-    firestore.collection('categories').add({'name': event, 'type': 'event'});
+    firestore.collection('categories').add({
+      'name': event,
+      'type': 'event',
+      'timeStamp': Timestamp.now(),
+    });
   }
 
   Stream<List<Category>> eventCategoryStream() {

@@ -40,3 +40,5 @@ class EventAddedSuccessfully extends AdminState{}
 class OrganizerAccepted extends AdminState{}
 
 class OrganizerRejected extends AdminState{}
+
+class FeatureStatus extends AdminState{}

@@ -64,3 +64,9 @@ class RejectOrganizer extends AdminEvent {
   RejectOrganizer({required this.id});
   
 }
+class IsFeaturedSwitch extends AdminEvent {
+  final bool isFeatured;
+  final String uid;
+
+  IsFeaturedSwitch({required this.isFeatured, required this.uid});
+}

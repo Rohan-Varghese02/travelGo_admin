@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -24,6 +25,8 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     // Pending Organizer
     on<AcceptOrganizer>(acceptOrganizer);
     on<RejectOrganizer>(rejectOrganizer);
+    ///
+     on<IsFeaturedSwitch>(isFeaturedSwitch);
   }
 
   // Category Action  -- Country//
@@ -103,5 +106,12 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     final api = ApiServices();
     api.rejectOrganizer(event.id);
     emit(OrganizerRejected());
+  }
+
+  FutureOr<void> isFeaturedSwitch(IsFeaturedSwitch event, Emitter<AdminState> emit) {
+        bool isFeature = !event.isFeatured;
+    log(isFeature.toString());
+    ApiServices().isFeatureCategory(isFeature, event.uid);
+    emit(FeatureStatus());
   }
 }

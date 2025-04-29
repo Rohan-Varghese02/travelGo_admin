@@ -8,3 +8,4 @@ class SelectDashboardPage extends DashboardEvent {
 
   SelectDashboardPage({required this.index});
 }
+

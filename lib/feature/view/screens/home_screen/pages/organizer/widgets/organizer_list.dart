@@ -17,7 +17,7 @@ class OrganizerList extends StatelessWidget {
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 1,
+            childAspectRatio: 1.75,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
           ),
