@@ -1,9 +1,9 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelgo_admin/data/models/post_data_model.dart';
+import 'package:travelgo_admin/data/models/request_data.dart';
 
 class StreamServices {
-   Stream<List<PostDataModel>> getFilteredPosts(
+  Stream<List<PostDataModel>> getFilteredPosts(
     String searchQuery, {
     String? category,
     String? country,
@@ -36,6 +36,16 @@ class StreamServices {
 
         return matchesSearch && matchesCategory && matchesCountry;
       }).toList();
+    });
+  }
+
+  Stream<List<RequestData>> getRequest() {
+    return FirebaseFirestore.instance.collection('Requests').where('response', isEqualTo: 'Pending').snapshots().map((
+      snapshot,
+    ) {
+      return snapshot.docs
+          .map((doc) => RequestData.fromMap(doc.data()))
+          .toList();
     });
   }
 }

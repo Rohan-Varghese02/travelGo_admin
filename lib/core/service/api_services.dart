@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travelgo_admin/data/models/category_model.dart';
 import 'package:travelgo_admin/data/models/pending_organizer_model.dart';
+import 'package:travelgo_admin/data/models/request_data.dart';
 import 'package:travelgo_admin/data/models/user_model.dart';
 
 class ApiServices {
@@ -128,5 +129,18 @@ class ApiServices {
                   .map((doc) => OrganizerModel.fromFireStore(doc))
                   .toList(),
         );
+  }
+
+  Future<void> approveRequest(RequestData request) async {
+    await FirebaseFirestore.instance
+        .collection('Requests')
+        .doc(request.requestId)
+        .update({'response': 'Approved'});
+  }
+  Future<void> rejectRequest(RequestData request) async {
+    await FirebaseFirestore.instance
+        .collection('Requests')
+        .doc(request.requestId)
+        .update({'response': 'Declined'});
   }
 }

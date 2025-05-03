@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:travelgo_admin/core/service/api_services.dart';
+import 'package:travelgo_admin/data/models/request_data.dart';
 
 part 'admin_event.dart';
 part 'admin_state.dart';
@@ -25,8 +26,12 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     // Pending Organizer
     on<AcceptOrganizer>(acceptOrganizer);
     on<RejectOrganizer>(rejectOrganizer);
+
     ///
-     on<IsFeaturedSwitch>(isFeaturedSwitch);
+    on<IsFeaturedSwitch>(isFeaturedSwitch);
+    //Dashboard
+    on<RequestAccept>(requestAccept);
+    on<RequestReject>(requestReject);
   }
 
   // Category Action  -- Country//
@@ -108,10 +113,37 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     emit(OrganizerRejected());
   }
 
-  FutureOr<void> isFeaturedSwitch(IsFeaturedSwitch event, Emitter<AdminState> emit) {
-        bool isFeature = !event.isFeatured;
+  FutureOr<void> isFeaturedSwitch(
+    IsFeaturedSwitch event,
+    Emitter<AdminState> emit,
+  ) {
+    bool isFeature = !event.isFeatured;
     log(isFeature.toString());
     ApiServices().isFeatureCategory(isFeature, event.uid);
     emit(FeatureStatus());
+  }
+
+  FutureOr<void> requestAccept(
+    RequestAccept event,
+    Emitter<AdminState> emit,
+  ) async {
+    try {
+      await ApiServices().approveRequest(event.request);
+      emit(RequestStatus(message: 'Request status Approved'));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  FutureOr<void> requestReject(
+    RequestReject event,
+    Emitter<AdminState> emit,
+  ) async {
+    try {
+      await ApiServices().rejectRequest(event.request);
+      emit(RequestStatus(message: 'Request status Declined'));
+    } catch (e) {
+      print(e);
+    }
   }
 }

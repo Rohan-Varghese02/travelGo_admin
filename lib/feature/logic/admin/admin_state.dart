@@ -27,18 +27,22 @@ class DeleteIntitateCategoryState extends AdminState {
   DeleteIntitateCategoryState({required this.id, required this.name});
 }
 
-class CategoryDeletedSuccessful extends AdminState{
-  
-}
+class CategoryDeletedSuccessful extends AdminState {}
 
 // Category Action  -- Event//
-class EventAddMenuOpen extends AdminState{}
+class EventAddMenuOpen extends AdminState {}
 
-class EventAddedSuccessfully extends AdminState{}
+class EventAddedSuccessfully extends AdminState {}
 
 // Pending Organizer --- Event
-class OrganizerAccepted extends AdminState{}
+class OrganizerAccepted extends AdminState {}
 
-class OrganizerRejected extends AdminState{}
+class OrganizerRejected extends AdminState {}
 
-class FeatureStatus extends AdminState{}
+class FeatureStatus extends AdminState {}
+
+class RequestStatus extends AdminState {
+  final String message;
+
+  RequestStatus({required this.message});
+}
